@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Own a Home in Japan | International Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #ffffff;
+    --black: #0a0a0a;
+    --navy: #111827;
+    --red: #c8102e;
+    --red-dark: #9e0c23;
+    --red-light: #fdf1f2;
+    --red-mid: #f5c2c9;
+    --gray-50: #fafafa;
+    --gray-100: #f4f4f5;
+    --gray-200: #e4e4e7;
+    --gray-400: #a1a1aa;
+    --gray-600: #52525b;
+    --text: #18181b;
+    --muted: #71717a;
+    --border: #e4e4e7;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--text); font-family: var(--sans); line-height: 1.7; overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+  }
+  nav.scrolled { border-color: var(--border); }
+  .nav-logo { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; color: var(--navy); }
+  .nav-logo span { color: var(--red); }
+  .nav-cta {
+    background: var(--red);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 10px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .nav-cta:hover { background: var(--red-dark); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--red-light) 0%, var(--white) 60%);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,16,46,0.06) 0%, transparent 70%);
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items: center;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    background: var(--red-light);
+    border: 1px solid var(--red-mid);
+    border-radius: 100px;
+    padding: 6px 16px;
+    margin-bottom: 24px;
+    letter-spacing: 0.03em;
+  }
+  .hero-badge::before { content: '🇯🇵'; font-size: 12px; }
+  .hero h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+  .hero h1 span { color: var(--red); }
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 32px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 15px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1.5px solid var(--gray-200);
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 15px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); }
+  .hero-trust {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .trust-item { display: flex; flex-direction: column; }
+  .trust-num { font-size: 1.4rem; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; }
+  .trust-label { font-size: 11px; color: var(--muted); letter-spacing: 0.02em; margin-top: 2px; }
+
+  .hero-visual {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+  }
+  .hero-img {
+    width: 100%; height: 100%;
+    background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=85') center/cover;
+  }
+  .hero-visual-card {
+    position: absolute;
+    bottom: 20px; left: 20px; right: 20px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .visual-badge {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--red-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .visual-text-title { font-size: 12px; font-weight: 700; color: var(--navy); }
+  .visual-text-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 88px 48px; }
+  .sec-inner { max-width: 1100px; margin: 0 auto; }
+  .sec-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .sec-title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  .sec-lead {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 620px;
+    margin-bottom: 56px;
+  }
+
+  /* ── CONCERNS (FAQ-style early) ── */
+  .concerns-section { background: var(--gray-50); }
+  .concerns-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .concern-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .concern-card:hover { border-color: var(--red-mid); transform: translateY(-2px); }
+  .concern-q {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .concern-q-mark {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .concern-a { font-size: 0.85rem; color: var(--muted); line-height: 1.8; padding-left: 32px; }
+
+  /* ── WHY US ── */
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .why-card {
+    padding: 28px;
+    border-radius: 14px;
+    background: var(--gray-50);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .why-card:hover { border-color: var(--red-mid); transform: translateY(-4px); }
+  .why-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: var(--red-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+  .why-card h4 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; letter-spacing: -0.01em; }
+  .why-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+
+  /* ── PROCESS ── */
+  .process-section { background: var(--navy); color: #fff; }
+  .process-section .sec-eyebrow { color: #f87171; }
+  .process-section .sec-title { color: #fff; }
+  .process-section .sec-lead { color: rgba(255,255,255,0.5); }
+  .process-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; position: relative; }
+  .process-step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 22px 16px;
+    text-align: center;
+  }
+  .process-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #f87171;
+    margin-bottom: 10px;
+  }
+  .process-step h5 { font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; }
+  .process-step p { font-size: 0.7rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+  /* ── TESTIMONIAL ── */
+  .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .testimonial-card {
+    background: var(--gray-50);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+  }
+  .testimonial-stars { color: var(--red); font-size: 13px; margin-bottom: 14px; letter-spacing: 2px; }
+  .testimonial-text { font-size: 0.875rem; color: var(--text); line-height: 1.8; margin-bottom: 20px; font-style: italic; }
+  .testimonial-person { display: flex; align-items: center; gap: 10px; }
+  .testimonial-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--red-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--red);
+  }
+  .testimonial-name { font-size: 0.8rem; font-weight: 700; color: var(--navy); }
+  .testimonial-loc { font-size: 0.7rem; color: var(--muted); }
+
+  /* ── CTA STRIP ── */
+  .cta-strip {
+    background: var(--red);
+    padding: 56px 48px;
+    text-align: center;
+  }
+  .cta-strip h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .cta-strip p { font-size: 0.95rem; color: rgba(255,255,255,0.8); margin-bottom: 28px; }
+  .btn-white {
+    background: #fff;
+    color: var(--red);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 15px 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+  .btn-white:hover { transform: translateY(-2px); }
+
+  /* ── FAQ ── */
+  .faq-section { background: var(--gray-50); }
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 26px;
+  }
+  .faq-q { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .faq-a { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+
+  /* ── FOOTER CTA ── */
+  .footer-cta {
+    padding: 80px 48px;
+    text-align: center;
+    background: var(--navy);
+  }
+  .footer-cta h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .footer-cta p { font-size: 1rem; color: rgba(255,255,255,0.5); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+  footer {
+    padding: 32px 48px;
+    text-align: center;
+    background: var(--black);
+    color: rgba(255,255,255,0.3);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FADE ── */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    section { padding: 64px 24px; }
+    .concerns-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    .cta-strip { padding: 48px 24px; }
+    .footer-cta { padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">Nippon<span>Estate</span></div>
+  <a href="#contact" class="nav-cta">Free Consultation</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">TRUSTED BY BUYERS IN 20+ COUNTRIES</div>
+      <h1>Own a Home in Japan.<br><span>Without the Guesswork.</span></h1>
+      <p class="hero-desc">From your first inquiry to receiving the keys — we guide international buyers through every step of purchasing property in Japan, entirely in English.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Book a Free Consultation</a>
+        <a href="#process" class="btn-outline">See How It Works</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">
+          <div class="trust-num">500+</div>
+          <div class="trust-label">Properties Sold</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-num">20+</div>
+          <div class="trust-label">Countries Served</div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-num">100%</div>
+          <div class="trust-label">Remote Closing Available</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img"></div>
+      <div class="hero-visual-card">
+        <div class="visual-badge">🏠</div>
+        <div>
+          <div class="visual-text-title">Kyoto Traditional House</div>
+          <div class="visual-text-sub">Fully renovated · Ready to own</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONCERNS -->
+<section class="concerns-section">
+  <div class="sec-inner">
+    <div class="fade-up">
+      <div class="sec-eyebrow">Common Concerns</div>
+      <div class="sec-title">Buying property abroad feels risky.<br>Let's address that first.</div>
+      <p class="sec-lead">These are the exact questions every international buyer asks us. Here's the honest answer to each.</p>
+    </div>
+    <div class="concerns-grid">
+      <div class="concern-card fade-up">
+        <div class="concern-q"><span class="concern-q-mark">Q</span>Can foreigners actually buy property in Japan?</div>
+        <div class="concern-a">Yes. Japan places no restrictions on foreign property ownership. You can buy, own, and sell real estate exactly as a Japanese citizen can.</div>
+      </div>
+      <div class="concern-card fade-up">
+        <div class="concern-q"><span class="concern-q-mark">Q</span>Do I need a visa to purchase a home?</div>
+        <div class="concern-a">No visa is required to own property. Many of our clients purchase as an investment or second home without ever relocating to Japan.</div>
+      </div>
+      <div class="concern-card fade-up">
+        <div class="concern-q"><span class="concern-q-mark">Q</span>What if I don't speak Japanese?</div>
+        <div class="concern-a">Every step — from property search to contract signing — is handled in English by our bilingual team. Legal documents are translated and explained clearly.</div>
+      </div>
+      <div class="concern-card fade-up">
+        <div class="concern-q"><span class="concern-q-mark">Q</span>Can I complete the purchase without visiting Japan?</div>
+        <div class="concern-a">Yes. We support remote closing via power of attorney, video viewings, and digital document signing for clients who cannot travel.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <div class="sec-inner">
+    <div class="fade-up">
+      <div class="sec-eyebrow">Why Choose Us</div>
+      <div class="sec-title">A team built specifically<br>for international buyers.</div>
+      <p class="sec-lead">We're not a translation add-on to a Japanese agency. We were built from the ground up to serve overseas clients.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <div class="why-icon">🌐</div>
+        <h4>English-First, Always</h4>
+        <p>Every consultant, contract, and communication happens in fluent English — no translation delays, no miscommunication.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">🏛️</div>
+        <h4>Full Legal Support</h4>
+        <p>We coordinate with licensed judicial scriveners and lawyers to ensure your purchase is fully compliant and protected.</p>
+      </div>
+      <div class="why-card fade-up">
+        <div class="why-icon">🔑</div>
+        <h4>Beyond the Purchase</h4>
+        <p>Renovation, property management, and rental support (including Airbnb-style operations) — all under one roof.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="sec-inner">
+    <div class="fade-up">
+      <div class="sec-eyebrow">The Process</div>
+      <div class="sec-title">From inquiry to ownership,<br>in five clear steps.</div>
+      <p class="sec-lead">No hidden steps. No surprises. Here's exactly what happens after you reach out.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step fade-up">
+        <div class="process-num">01</div>
+        <h5>Free Consultation</h5>
+        <p>Share your goals — investment, second home, or relocation.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">02</div>
+        <h5>Property Matching</h5>
+        <p>We curate listings based on your budget and criteria.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">03</div>
+        <h5>Remote Viewing</h5>
+        <p>Live video tours for properties you can't visit in person.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">04</div>
+        <h5>Contract & Closing</h5>
+        <p>English-language contracts with full legal support.</p>
+      </div>
+      <div class="process-step fade-up">
+        <div class="process-num">05</div>
+        <h5>Ongoing Management</h5>
+        <p>Renovation, rental, and property management as needed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="sec-inner">
+    <div class="fade-up">
+      <div class="sec-eyebrow">Client Stories</div>
+      <div class="sec-title">Trusted by buyers around the world.</div>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I never thought I could buy a house in Japan without speaking Japanese. The whole process was handled remotely from Vancouver."</p>
+        <div class="testimonial-person">
+          <div class="testimonial-avatar">J</div>
+          <div>
+            <div class="testimonial-name">James H.</div>
+            <div class="testimonial-loc">Vancouver, Canada</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"As an investor, I needed clear numbers and legal certainty. Their team delivered both, in plain English, every step of the way."</p>
+        <div class="testimonial-person">
+          <div class="testimonial-avatar">S</div>
+          <div>
+            <div class="testimonial-name">Sarah L.</div>
+            <div class="testimonial-loc">Singapore</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"From viewing to keys in hand took less than two months — and I only visited Japan once, at the very end."</p>
+        <div class="testimonial-person">
+          <div class="testimonial-avatar">M</div>
+          <div>
+            <div class="testimonial-name">Marco B.</div>
+            <div class="testimonial-loc">Milan, Italy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <h2>Your Japan property journey starts with one conversation.</h2>
+  <p>No obligation. No pressure. Just honest answers to your questions.</p>
+  <a href="#contact" class="btn-white">Book Your Free Consultation →</a>
+</div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="sec-inner">
+    <div class="fade-up">
+      <div class="sec-eyebrow">FAQ</div>
+      <div class="sec-title">A few more things you might be wondering.</div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item fade-up">
+        <div class="faq-q">What are the ongoing costs of owning property in Japan?</div>
+        <div class="faq-a">Annual property tax, and if applicable, management fees for condominiums. We provide a full cost breakdown before you commit to any property.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q">Can I rent out my property while I'm not using it?</div>
+        <div class="faq-a">Yes. We offer rental and property management support, including short-term rental (Airbnb-style) setups where permitted by local regulations.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q">How long does the entire process typically take?</div>
+        <div class="faq-a">From initial consultation to closing, most purchases complete within 4–8 weeks, depending on financing and property type.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q">Do you only work with buyers, or also help after purchase?</div>
+        <div class="faq-a">Our relationship continues after closing — renovation coordination, rental management, and ongoing support are all part of our service.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="footer-cta" id="contact">
+  <h2>Let's talk about your Japan property goals.</h2>
+  <p>Book a free, no-pressure consultation with our English-speaking team today.</p>
+  <a href="#" class="btn-white">Book a Free Consultation →</a>
+</div>
+
+<footer>
+  © 2026 NIPPON ESTATE · INTERNATIONAL REAL ESTATE SERVICES
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
