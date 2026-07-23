@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Own a Home in Japan | International Real Estate</title>
+<title>Own a Home in Japan | NipponEstate – International Real Estate</title>
+<meta name="description" content="Expert guidance for international buyers purchasing property in Japan. English-first service from consultation to closing. 500+ properties sold across 20+ countries.">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Space+Mono&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -47,6 +48,21 @@
   nav.scrolled { border-color: var(--border); }
   .nav-logo { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em; color: var(--navy); }
   .nav-logo span { color: var(--red); }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .lang-badges { display: flex; gap: 6px; align-items: center; }
+  .lang-badge {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--gray-100);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 8px;
+    letter-spacing: 0.02em;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .lang-badge.active { color: var(--red); border-color: var(--red-mid); background: var(--red-light); }
+  .lang-badge:hover { color: var(--red); border-color: var(--red-mid); }
   .nav-cta {
     background: var(--red);
     color: #fff;
@@ -161,7 +177,9 @@
   .hero-img {
     width: 100%; height: 100%;
     background: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=85') center/cover;
+    transition: transform 6s ease-out;
   }
+  .hero-visual:hover .hero-img { transform: scale(1.04); }
   .hero-visual-card {
     position: absolute;
     bottom: 20px; left: 20px; right: 20px;
@@ -213,7 +231,7 @@
     margin-bottom: 56px;
   }
 
-  /* ── CONCERNS (FAQ-style early) ── */
+  /* ── CONCERNS ── */
   .concerns-section { background: var(--gray-50); }
   .concerns-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .concern-card {
@@ -247,6 +265,186 @@
   }
   .concern-a { font-size: 0.85rem; color: var(--muted); line-height: 1.8; padding-left: 32px; }
 
+  /* ── GALLERY ── */
+  .gallery-section { background: var(--white); overflow: hidden; }
+  .gallery-scroll {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 0 24px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--red-mid) transparent;
+  }
+  .gallery-scroll::-webkit-scrollbar { height: 6px; }
+  .gallery-scroll::-webkit-scrollbar-track { background: transparent; }
+  .gallery-scroll::-webkit-scrollbar-thumb { background: var(--red-mid); border-radius: 3px; }
+  .gallery-card {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--white);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .gallery-card:first-child { margin-left: 0; }
+  .gallery-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+  .gallery-card-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+  }
+  .gallery-card:hover .gallery-card-img { transform: scale(1.05); }
+  .gallery-card-img-wrap { overflow: hidden; position: relative; }
+  .gallery-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(17,24,39,0.75) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+  }
+  .gallery-card:hover .gallery-card-overlay { opacity: 1; }
+  .gallery-overlay-text { color: #fff; font-size: 0.8rem; line-height: 1.6; }
+  .gallery-card-body { padding: 20px; }
+  .gallery-card-area {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .gallery-card-price {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .gallery-card-usd {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .gallery-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .gallery-tag {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--gray-600);
+    background: var(--gray-100);
+    border-radius: 4px;
+    padding: 3px 8px;
+  }
+
+  /* ── PARALLAX DIVIDER ── */
+  .parallax-divider {
+    height: 340px;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+  }
+  .parallax-divider::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(17,24,39,0.3) 0%, rgba(17,24,39,0.5) 100%);
+  }
+  .parallax-quote {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 40px;
+  }
+  .parallax-quote blockquote {
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-weight: 300;
+    color: #fff;
+    font-style: italic;
+    max-width: 640px;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── BEFORE/AFTER ── */
+  .ba-section { background: var(--gray-50); }
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .ba-item { border-radius: 16px; overflow: hidden; background: var(--white); border: 1px solid var(--border); }
+  .ba-item-header { padding: 20px 24px 12px; }
+  .ba-item-title { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .ba-item-sub { font-size: 0.8rem; color: var(--muted); }
+  .ba-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    cursor: ew-resize;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .ba-slider img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+  .ba-after { clip-path: inset(0 50% 0 0); }
+  .ba-handle {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    width: 3px;
+    background: var(--white);
+    transform: translateX(-50%);
+    z-index: 2;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  }
+  .ba-handle::after {
+    content: '⟨ ⟩';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+  .ba-label {
+    position: absolute;
+    top: 12px;
+    z-index: 3;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+    color: #fff;
+  }
+  .ba-label-before { left: 12px; background: rgba(17,24,39,0.7); }
+  .ba-label-after { right: 12px; background: rgba(200,16,46,0.8); }
+
   /* ── WHY US ── */
   .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .why-card {
@@ -269,6 +467,87 @@
   }
   .why-card h4 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; letter-spacing: -0.01em; }
   .why-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
+
+  /* ── MAP ── */
+  .map-section { background: var(--white); }
+  .map-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .map-svg-wrap {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .map-svg-wrap svg { width: 100%; height: auto; }
+  .map-pin {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .map-pin:hover { transform: scale(1.2); }
+  .map-pin-dot {
+    fill: var(--red);
+    transition: fill 0.2s;
+  }
+  .map-pin-pulse {
+    fill: var(--red);
+    opacity: 0.3;
+    animation: pinPulse 2s ease-out infinite;
+  }
+  @keyframes pinPulse {
+    0% { r: 6; opacity: 0.3; }
+    100% { r: 16; opacity: 0; }
+  }
+  .map-tooltip {
+    position: absolute;
+    background: var(--navy);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.2s, transform 0.2s;
+    white-space: nowrap;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .map-tooltip.show { opacity: 1; transform: translateY(0); }
+  .map-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--navy);
+  }
+  .map-areas-list { display: flex; flex-direction: column; gap: 16px; }
+  .map-area-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--gray-50);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .map-area-item:hover { border-color: var(--red-mid); transform: translateX(4px); }
+  .map-area-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+  }
+  .map-area-name { font-size: 0.9rem; font-weight: 700; color: var(--navy); }
+  .map-area-desc { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
 
   /* ── PROCESS ── */
   .process-section { background: var(--navy); color: #fff; }
@@ -368,21 +647,79 @@
     letter-spacing: 0.05em;
   }
 
+  /* ── FIXED CTA BAR ── */
+  .fixed-cta-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 90;
+    background: rgba(17,24,39,0.95);
+    backdrop-filter: blur(12px);
+    padding: 14px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .fixed-cta-bar.show { transform: translateY(0); }
+  .fixed-cta-bar.hidden { transform: translateY(100%); }
+  .fixed-cta-text { color: rgba(255,255,255,0.8); font-size: 0.85rem; font-weight: 500; }
+  .fixed-cta-btn {
+    background: var(--red);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.3s;
+    white-space: nowrap;
+  }
+  .fixed-cta-btn:hover { background: var(--red-dark); }
+  .fixed-cta-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.2s;
+    line-height: 1;
+  }
+  .fixed-cta-close:hover { color: #fff; }
+
   /* ── FADE ── */
   .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+  /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
+    .lang-badges { display: none; }
     .hero { padding: 100px 24px 60px; }
     .hero-inner { grid-template-columns: 1fr; gap: 40px; }
     section { padding: 64px 24px; }
     .concerns-grid { grid-template-columns: 1fr; }
+    .gallery-card { flex: 0 0 280px; }
+    .ba-grid { grid-template-columns: 1fr; }
     .why-grid { grid-template-columns: 1fr; }
+    .map-container { grid-template-columns: 1fr; gap: 32px; }
+    .map-svg-wrap { max-width: 300px; }
     .process-steps { grid-template-columns: 1fr 1fr; gap: 10px; }
     .testimonial-grid { grid-template-columns: 1fr; }
     .cta-strip { padding: 48px 24px; }
     .footer-cta { padding: 60px 24px; }
+    .fixed-cta-bar { padding: 12px 20px; gap: 12px; }
+    .fixed-cta-text { font-size: 0.75rem; }
+    .parallax-divider { background-attachment: scroll; height: 280px; }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-card { flex: 0 0 260px; }
+    .hero-trust { gap: 20px; }
+    .fixed-cta-text { display: none; }
   }
 </style>
 </head>
@@ -390,7 +727,15 @@
 
 <nav id="nav">
   <div class="nav-logo">Nippon<span>Estate</span></div>
-  <a href="#contact" class="nav-cta">Free Consultation</a>
+  <div class="nav-right">
+    <div class="lang-badges">
+      <span class="lang-badge active">EN</span>
+      <span class="lang-badge">中文</span>
+      <span class="lang-badge">한국어</span>
+      <span class="lang-badge">FR</span>
+    </div>
+    <a href="#contact" class="nav-cta">Free Consultation</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -404,17 +749,17 @@
         <a href="#contact" class="btn-primary">Book a Free Consultation</a>
         <a href="#process" class="btn-outline">See How It Works</a>
       </div>
-      <div class="hero-trust">
+      <div class="hero-trust" id="trustCounters">
         <div class="trust-item">
-          <div class="trust-num">500+</div>
+          <div class="trust-num" data-target="500" data-suffix="+">0</div>
           <div class="trust-label">Properties Sold</div>
         </div>
         <div class="trust-item">
-          <div class="trust-num">20+</div>
+          <div class="trust-num" data-target="20" data-suffix="+">0</div>
           <div class="trust-label">Countries Served</div>
         </div>
         <div class="trust-item">
-          <div class="trust-num">100%</div>
+          <div class="trust-num" data-target="100" data-suffix="%">0</div>
           <div class="trust-label">Remote Closing Available</div>
         </div>
       </div>
@@ -461,6 +806,160 @@
   </div>
 </section>
 
+<!-- PROPERTY GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="sec-inner">
+    <div class="fade-up">
+      <div class="sec-eyebrow">Featured Properties</div>
+      <div class="sec-title">Handpicked homes across Japan's<br>most sought-after regions.</div>
+      <p class="sec-lead">From Kyoto's historic machiya townhouses to Tokyo's sleek high-rises — explore curated properties for international buyers.</p>
+    </div>
+    <div class="gallery-scroll">
+      <!-- Kyoto -->
+      <div class="gallery-card fade-up">
+        <div class="gallery-card-img-wrap">
+          <img class="gallery-card-img" src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&q=85" alt="Kyoto traditional machiya townhouse" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-overlay-text">A beautifully restored machiya in Kyoto's historic Higashiyama district, featuring original cedar beams and a private courtyard garden.</div>
+          </div>
+        </div>
+        <div class="gallery-card-body">
+          <div class="gallery-card-area">Kyoto · Higashiyama</div>
+          <div class="gallery-card-price">¥45,000,000</div>
+          <div class="gallery-card-usd">≈ $302,000 USD · €276,000 EUR</div>
+          <div class="gallery-tags">
+            <span class="gallery-tag">Traditional Machiya</span>
+            <span class="gallery-tag">Renovated</span>
+            <span class="gallery-tag">Garden</span>
+          </div>
+        </div>
+      </div>
+      <!-- Karuizawa -->
+      <div class="gallery-card fade-up">
+        <div class="gallery-card-img-wrap">
+          <img class="gallery-card-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=85" alt="Karuizawa luxury mountain villa" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-overlay-text">A modern mountain retreat in Karuizawa's premier highland zone, surrounded by birch forests with year-round resort access.</div>
+          </div>
+        </div>
+        <div class="gallery-card-body">
+          <div class="gallery-card-area">Karuizawa · Nagano</div>
+          <div class="gallery-card-price">¥85,000,000</div>
+          <div class="gallery-card-usd">≈ $570,000 USD · €521,000 EUR</div>
+          <div class="gallery-tags">
+            <span class="gallery-tag">Mountain Villa</span>
+            <span class="gallery-tag">Resort Area</span>
+            <span class="gallery-tag">4 Bedrooms</span>
+          </div>
+        </div>
+      </div>
+      <!-- Tokyo -->
+      <div class="gallery-card fade-up">
+        <div class="gallery-card-img-wrap">
+          <img class="gallery-card-img" src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=800&q=85" alt="Tokyo luxury tower residence" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-overlay-text">A premium high-rise residence in Minato-ku with panoramic views of Tokyo Tower and the bay, including concierge services.</div>
+          </div>
+        </div>
+        <div class="gallery-card-body">
+          <div class="gallery-card-area">Tokyo · Minato-ku</div>
+          <div class="gallery-card-price">¥120,000,000</div>
+          <div class="gallery-card-usd">≈ $805,000 USD · €736,000 EUR</div>
+          <div class="gallery-tags">
+            <span class="gallery-tag">Tower Residence</span>
+            <span class="gallery-tag">Bay View</span>
+            <span class="gallery-tag">Concierge</span>
+          </div>
+        </div>
+      </div>
+      <!-- Okinawa -->
+      <div class="gallery-card fade-up">
+        <div class="gallery-card-img-wrap">
+          <img class="gallery-card-img" src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800&q=85" alt="Okinawa beachfront resort property" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-overlay-text">An oceanfront property in Okinawa's Onna village with direct beach access, infinity pool, and stunning East China Sea views.</div>
+          </div>
+        </div>
+        <div class="gallery-card-body">
+          <div class="gallery-card-area">Okinawa · Onna</div>
+          <div class="gallery-card-price">¥68,000,000</div>
+          <div class="gallery-card-usd">≈ $456,000 USD · €417,000 EUR</div>
+          <div class="gallery-tags">
+            <span class="gallery-tag">Beachfront</span>
+            <span class="gallery-tag">Ocean View</span>
+            <span class="gallery-tag">Pool</span>
+          </div>
+        </div>
+      </div>
+      <!-- Osaka -->
+      <div class="gallery-card fade-up">
+        <div class="gallery-card-img-wrap">
+          <img class="gallery-card-img" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=85" alt="Osaka modern luxury residence" loading="lazy">
+          <div class="gallery-card-overlay">
+            <div class="gallery-overlay-text">A sleek modern residence in Osaka's Kita-ku business district, ideal for investment with strong rental demand from business travelers.</div>
+          </div>
+        </div>
+        <div class="gallery-card-body">
+          <div class="gallery-card-area">Osaka · Kita-ku</div>
+          <div class="gallery-card-price">¥38,000,000</div>
+          <div class="gallery-card-usd">≈ $255,000 USD · €233,000 EUR</div>
+          <div class="gallery-tags">
+            <span class="gallery-tag">Modern Design</span>
+            <span class="gallery-tag">Investment</span>
+            <span class="gallery-tag">Central</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX DIVIDER 1 -->
+<div class="parallax-divider" style="background-image: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1400&q=85');">
+  <div class="parallax-quote">
+    <blockquote>"A home in Japan is not just property — it's a gateway to a culture of craftsmanship, tranquility, and timeless beauty."</blockquote>
+  </div>
+</div>
+
+<!-- BEFORE / AFTER -->
+<section class="ba-section" id="renovation">
+  <div class="sec-inner">
+    <div class="fade-up">
+      <div class="sec-eyebrow">Renovation Showcase</div>
+      <div class="sec-title">See the transformation.<br>Before & after renovation.</div>
+      <p class="sec-lead">We manage the entire renovation process — from traditional kominka restoration to modern interior redesign — so you receive a move-in ready home.</p>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-item fade-up">
+        <div class="ba-item-header">
+          <div class="ba-item-title">Traditional Living Room Revival</div>
+          <div class="ba-item-sub">Kyoto · Kominka full renovation</div>
+        </div>
+        <div class="ba-slider" data-ba="slider1">
+          <img class="ba-before" src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=800&q=85" alt="Before renovation - traditional living room">
+          <img class="ba-after" src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800&q=85" alt="After renovation - modern living room">
+          <div class="ba-handle"></div>
+          <span class="ba-label ba-label-before">Before</span>
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+      </div>
+      <div class="ba-item fade-up">
+        <div class="ba-item-header">
+          <div class="ba-item-title">Kitchen & Dining Modernization</div>
+          <div class="ba-item-sub">Osaka · Full kitchen remodel</div>
+        </div>
+        <div class="ba-slider" data-ba="slider2">
+          <img class="ba-before" src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=85" alt="Before renovation - kitchen">
+          <img class="ba-after" src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800&q=85" alt="After renovation - modern kitchen">
+          <div class="ba-handle"></div>
+          <span class="ba-label ba-label-before">Before</span>
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- WHY US -->
 <section>
   <div class="sec-inner">
@@ -488,6 +987,114 @@
     </div>
   </div>
 </section>
+
+<!-- AREA MAP -->
+<section class="map-section" id="areas">
+  <div class="sec-inner">
+    <div class="fade-up">
+      <div class="sec-eyebrow">Coverage Areas</div>
+      <div class="sec-title">We operate across Japan's<br>most popular regions.</div>
+      <p class="sec-lead">From the cultural heart of Kyoto to the tropical shores of Okinawa — our network covers the areas international buyers love most.</p>
+    </div>
+    <div class="map-container fade-up">
+      <div class="map-svg-wrap" id="mapWrap">
+        <svg viewBox="0 0 450 680" xmlns="http://www.w3.org/2000/svg" id="japanMap">
+          <!-- Japan simplified outline -->
+          <defs>
+            <linearGradient id="landGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#e4e4e7" />
+              <stop offset="100%" style="stop-color:#d4d4d8" />
+            </linearGradient>
+          </defs>
+          <!-- Hokkaido -->
+          <path d="M310,55 C325,40 355,35 375,45 C395,55 405,80 400,105 C395,130 380,145 360,148 C340,150 320,140 308,125 C295,110 290,85 295,70 C298,60 305,57 310,55Z" fill="url(#landGrad)" stroke="#a1a1aa" stroke-width="0.8"/>
+          <!-- Honshu (main island) -->
+          <path d="M340,165 C350,158 365,162 370,175 C375,188 370,200 360,215 C350,230 340,245 330,260 C320,275 310,288 300,300 C290,315 278,328 268,340 C258,352 248,362 238,372 C228,380 218,385 210,388 C200,390 192,385 186,376 C182,368 180,358 185,350 C190,340 200,332 212,328 C220,322 228,310 235,298 C242,286 250,272 260,258 C270,245 280,230 290,218 C300,206 310,192 320,180 C328,172 335,168 340,165Z" fill="url(#landGrad)" stroke="#a1a1aa" stroke-width="0.8"/>
+          <!-- Shikoku -->
+          <path d="M195,395 C210,388 228,392 235,405 C240,415 235,428 220,432 C205,436 192,428 188,415 C185,405 188,398 195,395Z" fill="url(#landGrad)" stroke="#a1a1aa" stroke-width="0.8"/>
+          <!-- Kyushu -->
+          <path d="M155,380 C170,372 185,378 190,395 C194,410 188,425 175,432 C162,438 148,430 142,415 C138,400 145,385 155,380Z" fill="url(#landGrad)" stroke="#a1a1aa" stroke-width="0.8"/>
+          <!-- Okinawa islands -->
+          <ellipse cx="120" cy="570" rx="12" ry="8" fill="url(#landGrad)" stroke="#a1a1aa" stroke-width="0.8"/>
+          <ellipse cx="110" cy="590" rx="8" ry="5" fill="url(#landGrad)" stroke="#a1a1aa" stroke-width="0.8"/>
+          <ellipse cx="105" cy="610" rx="10" ry="6" fill="url(#landGrad)" stroke="#a1a1aa" stroke-width="0.8"/>
+
+          <!-- City Pins -->
+          <!-- Tokyo -->
+          <g class="map-pin" data-city="Tokyo" data-desc="Tower residences, condos & investment properties" data-x="315" data-y="300">
+            <circle class="map-pin-pulse" cx="315" cy="300" r="6"/>
+            <circle class="map-pin-dot" cx="315" cy="300" r="5"/>
+          </g>
+          <!-- Kyoto -->
+          <g class="map-pin" data-city="Kyoto" data-desc="Traditional machiya & cultural properties" data-x="248" data-y="348">
+            <circle class="map-pin-pulse" cx="248" cy="348" r="6"/>
+            <circle class="map-pin-dot" cx="248" cy="348" r="5"/>
+          </g>
+          <!-- Osaka -->
+          <g class="map-pin" data-city="Osaka" data-desc="Modern residences & investment opportunities" data-x="255" data-y="370">
+            <circle class="map-pin-pulse" cx="255" cy="370" r="6"/>
+            <circle class="map-pin-dot" cx="255" cy="370" r="5"/>
+          </g>
+          <!-- Karuizawa -->
+          <g class="map-pin" data-city="Karuizawa" data-desc="Highland villas & resort retreats" data-x="310" data-y="265">
+            <circle class="map-pin-pulse" cx="310" cy="265" r="6"/>
+            <circle class="map-pin-dot" cx="310" cy="265" r="5"/>
+          </g>
+          <!-- Okinawa -->
+          <g class="map-pin" data-city="Okinawa" data-desc="Beachfront homes & tropical resorts" data-x="115" data-y="585">
+            <circle class="map-pin-pulse" cx="115" cy="585" r="6"/>
+            <circle class="map-pin-dot" cx="115" cy="585" r="5"/>
+          </g>
+        </svg>
+        <div class="map-tooltip" id="mapTooltip"></div>
+      </div>
+      <div class="map-areas-list">
+        <div class="map-area-item">
+          <div class="map-area-dot"></div>
+          <div>
+            <div class="map-area-name">Tokyo</div>
+            <div class="map-area-desc">Tower residences, condos & investment properties</div>
+          </div>
+        </div>
+        <div class="map-area-item">
+          <div class="map-area-dot"></div>
+          <div>
+            <div class="map-area-name">Kyoto</div>
+            <div class="map-area-desc">Traditional machiya & cultural properties</div>
+          </div>
+        </div>
+        <div class="map-area-item">
+          <div class="map-area-dot"></div>
+          <div>
+            <div class="map-area-name">Karuizawa</div>
+            <div class="map-area-desc">Highland villas & resort retreats</div>
+          </div>
+        </div>
+        <div class="map-area-item">
+          <div class="map-area-dot"></div>
+          <div>
+            <div class="map-area-name">Osaka</div>
+            <div class="map-area-desc">Modern residences & investment opportunities</div>
+          </div>
+        </div>
+        <div class="map-area-item">
+          <div class="map-area-dot"></div>
+          <div>
+            <div class="map-area-name">Okinawa</div>
+            <div class="map-area-desc">Beachfront homes & tropical resorts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX DIVIDER 2 -->
+<div class="parallax-divider" style="background-image: url('https://images.unsplash.com/photo-1492571350019-22de08371fd3?w=1400&q=85');">
+  <div class="parallax-quote">
+    <blockquote>"From the moment I inquired, every step felt personal, professional, and completely stress-free."<br><span style="font-size:0.75em; opacity:0.7; font-style:normal;">— Sarah L., Singapore</span></blockquote>
+  </div>
+</div>
 
 <!-- PROCESS -->
 <section class="process-section" id="process">
@@ -618,16 +1225,169 @@
   © 2026 NIPPON ESTATE · INTERNATIONAL REAL ESTATE SERVICES
 </footer>
 
+<!-- FIXED CTA BAR -->
+<div class="fixed-cta-bar" id="fixedCtaBar">
+  <span class="fixed-cta-text">Ready to explore properties in Japan?</span>
+  <a href="#contact" class="fixed-cta-btn">Book Free Consultation →</a>
+  <button class="fixed-cta-close" id="fixedCtaClose" aria-label="Close">✕</button>
+</div>
+
 <script>
+  // ── NAV SCROLL ──
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   });
 
-  const observer = new IntersectionObserver((entries) => {
+  // ── FADE-UP OBSERVER ──
+  const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+  // ── COUNT-UP ANIMATION ──
+  const countUpElements = document.querySelectorAll('.trust-num[data-target]');
+  let countUpFired = false;
+
+  function animateCountUp(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const duration = 2000;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+      el.textContent = current + (progress >= 1 ? suffix : '');
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      }
+    }
+    requestAnimationFrame(update);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !countUpFired) {
+        countUpFired = true;
+        countUpElements.forEach(el => animateCountUp(el));
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const trustSection = document.getElementById('trustCounters');
+  if (trustSection) counterObserver.observe(trustSection);
+
+  // ── BEFORE/AFTER SLIDERS ──
+  document.querySelectorAll('.ba-slider').forEach(slider => {
+    const afterImg = slider.querySelector('.ba-after');
+    const handle = slider.querySelector('.ba-handle');
+    let isDragging = false;
+
+    function setPosition(x) {
+      const rect = slider.getBoundingClientRect();
+      let percent = ((x - rect.left) / rect.width) * 100;
+      percent = Math.max(2, Math.min(98, percent));
+      afterImg.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+      handle.style.left = percent + '%';
+    }
+
+    // Mouse events
+    slider.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      setPosition(e.clientX);
+      e.preventDefault();
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging) setPosition(e.clientX);
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    // Touch events
+    slider.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      setPosition(e.touches[0].clientX);
+    }, { passive: true });
+    window.addEventListener('touchmove', (e) => {
+      if (isDragging) setPosition(e.touches[0].clientX);
+    }, { passive: true });
+    window.addEventListener('touchend', () => { isDragging = false; });
+
+    // Initialize at 50%
+    afterImg.style.clipPath = 'inset(0 50% 0 0)';
+  });
+
+  // ── MAP TOOLTIPS ──
+  const mapWrap = document.getElementById('mapWrap');
+  const mapTooltip = document.getElementById('mapTooltip');
+  const mapPins = document.querySelectorAll('.map-pin');
+
+  mapPins.forEach(pin => {
+    const city = pin.dataset.city;
+    const desc = pin.dataset.desc;
+
+    function showTooltip(e) {
+      const svgRect = document.getElementById('japanMap').getBoundingClientRect();
+      const wrapRect = mapWrap.getBoundingClientRect();
+      const pinX = parseFloat(pin.dataset.x);
+      const pinY = parseFloat(pin.dataset.y);
+
+      // Convert SVG coordinates to pixel positions
+      const svgWidth = 450;
+      const svgHeight = 680;
+      const scaleX = svgRect.width / svgWidth;
+      const scaleY = svgRect.height / svgHeight;
+
+      const pixelX = (pinX * scaleX) + (svgRect.left - wrapRect.left);
+      const pixelY = (pinY * scaleY) + (svgRect.top - wrapRect.top);
+
+      mapTooltip.innerHTML = `<strong>${city}</strong><br><span style="font-size:10px;opacity:0.8">${desc}</span>`;
+      mapTooltip.style.left = pixelX + 'px';
+      mapTooltip.style.top = (pixelY - 60) + 'px';
+      mapTooltip.style.transform = 'translateX(-50%)';
+      mapTooltip.classList.add('show');
+    }
+
+    function hideTooltip() {
+      mapTooltip.classList.remove('show');
+    }
+
+    pin.addEventListener('mouseenter', showTooltip);
+    pin.addEventListener('mouseleave', hideTooltip);
+    pin.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      showTooltip(e);
+      setTimeout(hideTooltip, 2500);
+    });
+  });
+
+  // ── FIXED CTA BAR ──
+  const fixedCtaBar = document.getElementById('fixedCtaBar');
+  const fixedCtaClose = document.getElementById('fixedCtaClose');
+  let ctaDismissed = false;
+  const heroEl = document.querySelector('.hero');
+
+  function checkFixedCta() {
+    if (ctaDismissed) return;
+    const heroBottom = heroEl.getBoundingClientRect().bottom;
+    if (heroBottom < 0) {
+      fixedCtaBar.classList.add('show');
+      fixedCtaBar.classList.remove('hidden');
+    } else {
+      fixedCtaBar.classList.remove('show');
+    }
+  }
+
+  window.addEventListener('scroll', checkFixedCta, { passive: true });
+
+  fixedCtaClose.addEventListener('click', () => {
+    ctaDismissed = true;
+    fixedCtaBar.classList.add('hidden');
+    fixedCtaBar.classList.remove('show');
+  });
 </script>
 </body>
 </html>
